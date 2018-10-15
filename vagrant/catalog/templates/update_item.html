@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories and items</title>
+</head>
+<body>
+<h1>Edit {{item.name}}</h1>
+
+<form method="post" action="/categories/{{item.category_id}}/items/{{item.id}}/update">
+    <label>
+        Item name:
+        <input type="text" name="name" value="{{item.name}}">
+    </label>
+    <label>
+        Item description
+        <input type="text" name="description" value="{{item.description}}">
+    </label>
+    <label>
+        Category:
+        <select name="category_id" required>
+            {% for category in categories %}
+                {% if category.id == item.category_id %}
+                    <option value="{{ category.id}}" selected="selected">{{ category.name }}</option>
+                {% else %}
+                    <option value="{{ category.id}}">{{ category.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </label>
+    <button>Submit</button>
+</form>
+
+</body>
+</html>

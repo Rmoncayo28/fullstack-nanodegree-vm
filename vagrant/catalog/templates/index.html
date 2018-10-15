@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories and items</title>
+</head>
+<body>
+<h1>Catalog website</h1>
+{% if categories %}
+<ul>
+    {% for category in categories %}
+    {% if sel_cat_id == category.id %}
+    <li><a style="border: brown 2px dashed;vertical-align: middle" href="/categories/{{ category.id }}">{{ category.name }}</a></li>
+    {% else %}
+    <li><a href="/categories/{{ category.id }}">{{ category.name }}</a></li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if items %}
+<ul>
+    {% for item in items %}
+    <li><a href="/categories/{{ item.category_id }}/items/{{ item.id }}">{{ item.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No items stored</p>
+{% endif %}
+
+</body>
+</html>

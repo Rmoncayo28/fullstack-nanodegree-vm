@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories and items</title>
+</head>
+<body>
+<h1>Catalog website</h1>
+{% if not item %}
+<h1>Item does not exist with this id</h1>
+{% endif %}
+{% if categories %}
+<ul>
+    {% for category in categories %}
+    {% if category.id == item.category_id %}
+    <li><a style="border: brown 2px dashed;vertical-align: middle" href="/categories/{{ category.id }}">{{ category.name }}</a></li>
+    {% else %}
+    <li><a href="/categories/{{ category.id }}">{{ category.name }}</a></li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2>{{item.name}}</h2>
+<p>{{item.description}}</p>
+{% if item %}
+<form method="get" action="/categories/{{item.category_id}}/items/{{item.id}}/update">
+    <button>Edit</button>
+</form>
+<form method="post" action="/categories/{{item.category_id}}/items/{{item.id}}/delete">
+    <button>Delete</button>
+</form>
+{% endif %}
+</body>
+</html>
